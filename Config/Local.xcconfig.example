@@ -1,0 +1,4 @@
+// Copy this file to Local.xcconfig and fill in your values. Git ignores Local.xcconfig.
+
+DEVELOPMENT_TEAM = ABCDE12345  // Xcode > Settings > Accounts, or at developer.apple.com > Membership.
+BUNDLE_ID_PREFIX = dev.michael // A prefix that no one else uses. The bundle ID becomes <prefix>.HackerTube.

@@ -1,0 +1,10 @@
+// Build settings for the HackerTube target that differ per developer
+// Put your own values in Local.xcconfig. Git ignores Local.xcconfig
+// Do not set Team in Xcode Signing & Capabilities tab: Xcode writes it into project.pbxproj.
+
+BUNDLE_ID_PREFIX = dev.$(USER)
+DEVELOPMENT_TEAM =
+
+#include? "Local.xcconfig"
+
+PRODUCT_BUNDLE_IDENTIFIER = $(BUNDLE_ID_PREFIX).HackerTube
