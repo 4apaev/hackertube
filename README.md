@@ -43,24 +43,49 @@ does not play the video, change `YouTube.appURL` in `HackerTube/YouTube.swift`.
 
 If the YouTube app does not open, the app shows a QR code. Scan it to watch on a phone.
 
+## Make targets
+
+Run `make` to see the list.
+
+| Target | Does |
+|---|---|
+| `make data` | Download the HackerTube data export into `data/` |
+| `make playlists` | Write `playlists.html` with the Swift script |
+| `make playlists-py` | Write `playlists.html` with the Python script |
+| `make assets` | Draw the app icon and Top Shelf images again |
+| `make build` | Build the app for the tvOS simulator |
+| `make run` | Build, install and start the app in the simulator |
+| `make shot` | Save a screenshot of one screen |
+| `make clean` | Remove `build/` and `playlists.html` |
+
+Change a variable on the command line, for example `make shot SCREEN=browse SHOT=browse.png`
+or `make run SIM="Apple TV"`.
+
 ## Screenshots in the simulator
 
 Debug builds read a `-screen` launch argument and open that screen directly.
 Use it when you cannot drive the simulator with a remote:
 
 ```sh
-scripts/shot.sh <simulator-id> video:fNk_zzaMoSs /tmp/video.png
+make shot SCREEN=video:fNk_zzaMoSs SHOT=video.png
 ```
 
 Values: `playlists`, `browse`, `library`, `search`, `video:<id>`, `playlist:<slug>`, `list:sort=recent`.
 
 ## Icons
 
-`scripts/make-assets.swift` draws the app icon and Top Shelf images.
+`scripts/make-assets.swift` draws the app icon and Top Shelf images. Run `make assets` after you change the design.
 
-```sh
-swift scripts/make-assets.swift HackerTube/Assets.xcassets
-```
+## YouTube playlist links
+
+`make playlists` writes `playlists.html`: one-click YouTube playlists from the HackerTube data export.
+
+1. Run `make data` to download the data into `data/`.
+2. Run `make playlists` (Swift) or `make playlists-py` (Python 3, standard library only).
+
+Both scripts write the same file. They also read the curated playlists from the API.
+
+Each ▶ link opens a temporary YouTube playlist of up to 50 videos. To keep a playlist, save it to your library on YouTube.
 
 ## Credits
 

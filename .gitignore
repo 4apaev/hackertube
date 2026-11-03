@@ -5,3 +5,9 @@ xcuserdata/
 .DS_Store
 .vscode
 Config/Local.xcconfig
+
+# Data export and pages made from it. Get them again with `make data` and `make playlists`.
+data/
+data.zip
+playlists.html
+__pycache__/

@@ -19,7 +19,7 @@ let black = CGColor(srgbRed: 0.06, green: 0.06, blue: 0.06, alpha: 1)
 func writeJSON(_ object: [String: Any], in dir: URL) throws {
     try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
     let data = try JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted, .sortedKeys])
-    try data.write(to: dir.appending(path: "Contents.json"))
+    try (data + Data("\n".utf8)).write(to: dir.appending(path: "Contents.json"))  // Xcode ends files with a newline
 }
 
 func render(_ width: Int, _ height: Int, to url: URL, draw: (CGContext, CGSize) -> Void) {
@@ -94,10 +94,15 @@ func iconStack(_ name: String, width: Int, height: Int, scales: [Int]) throws {
 
 func imageSet(_ dir: URL, name: String, width: Int, height: Int, scales: [Int], draw: (CGContext, CGSize) -> Void) throws {
     var images: [[String: Any]] = []
-    for scale in scales {
+    try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+    // Xcode lists a 1x and a 2x slot even when one is empty; match it so Xcode does not rewrite the file.
+    for scale in [1, 2] {
+        guard scales.contains(scale) else {
+            images.append(["idiom": "tv", "scale": "\(scale)x"])
+            continue
+        }
         let file = scale == 1 ? "\(name).png" : "\(name)@\(scale)x.png"
         images.append(["filename": file, "idiom": "tv", "scale": "\(scale)x"])
-        try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         render(width * scale, height * scale, to: dir.appending(path: file), draw: draw)
     }
     try writeJSON(["images": images, "info": info], in: dir)
