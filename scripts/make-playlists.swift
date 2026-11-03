@@ -3,7 +3,7 @@
 // Usage: swift scripts/make-playlists.swift [data-dir] [out.html]
 import Foundation
 
-let dataDir = URL(fileURLWithPath: CommandLine.arguments.count > 1 ? CommandLine.arguments[1] : "data")
+let dataDir = URL(fileURLWithPath: CommandLine.arguments.count > 1 ? CommandLine.arguments[1] : "hackertube-data")
 let outFile = URL(fileURLWithPath: CommandLine.arguments.count > 2 ? CommandLine.arguments[2] : "playlists.html")
 let maxVideos = 50  // YouTube ignores more ids in one watch_videos link
 
