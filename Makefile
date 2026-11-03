@@ -1,7 +1,7 @@
 # Shortcuts for the HackerTube scripts and builds. Run `make` to see the list.
 # Override a variable on the command line, for example: make shot SCREEN=browse
 
-DATA     ?= data
+DATA     ?= hackertube-data
 DATA_URL ?= https://hackertube.org/download/hackertube-data.zip
 OUT      ?= playlists.html
 SIM      ?= Apple TV 4K (3rd generation)
@@ -22,9 +22,9 @@ SIM_ID   = $(shell xcrun simctl list devices available -j | python3 -c 'import j
 help: ## Show this list
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{ printf "  make %-14s %s\n", $$1, $$2 }'
 
-data: ## Download the HackerTube data export into data/
+data: ## Download the HackerTube data export into hackertube-data/
 	curl -fL -o data.zip $(DATA_URL)
-	unzip -o -q data.zip -x '__MACOSX/*'
+	unzip -o -q data.zip
 
 playlists: ## Write playlists.html with the Swift script
 	swift scripts/make-playlists.swift $(DATA) $(OUT)
@@ -51,4 +51,4 @@ shot: run ## Screenshot one screen: make shot SCREEN=browse SHOT=out.png
 	@echo "Wrote $(SHOT)"
 
 clean: ## Remove build output and playlists.html
-	rm -rf build $(OUT)
+	rm -rf build *.zip $(OUT)

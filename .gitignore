@@ -7,7 +7,7 @@ xcuserdata/
 Config/Local.xcconfig
 
 # Data export and pages made from it. Get them again with `make data` and `make playlists`.
-data/
-data.zip
-playlists.html
+/hackertube-data/
+*.zip
+*.html
 __pycache__/

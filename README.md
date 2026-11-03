@@ -49,7 +49,7 @@ Run `make` to see the list.
 
 | Target | Does |
 |---|---|
-| `make data` | Download the HackerTube data export into `data/` |
+| `make data` | Download the HackerTube data export into `hackertube-data/` |
 | `make playlists` | Write `playlists.html` with the Swift script |
 | `make playlists-py` | Write `playlists.html` with the Python script |
 | `make assets` | Draw the app icon and Top Shelf images again |
@@ -80,7 +80,7 @@ Values: `playlists`, `browse`, `library`, `search`, `video:<id>`, `playlist:<slu
 
 `make playlists` writes `playlists.html`: one-click YouTube playlists from the HackerTube data export.
 
-1. Run `make data` to download the data into `data/`.
+1. Run `make data` to download the data into `hackertube-data/`.
 2. Run `make playlists` (Swift) or `make playlists-py` (Python 3, standard library only).
 
 Both scripts write the same file. They also read the curated playlists from the API.
